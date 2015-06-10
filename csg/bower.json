@@ -1,0 +1,13 @@
+{
+  "name": "CSG",
+  "version": "0.0.1",
+  "authors": [
+    "Tomasz Bednarz <tomasz.bednarz@gmail.com>"
+  ],
+  "description": "visualisation of CSG field",
+  "license": "QUT",
+  "dependencies": {
+    "angular": "~1.3.16",
+    "d3": "~3.5.5"
+  }
+}
