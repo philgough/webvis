@@ -16,9 +16,9 @@
     }
   </style>
 
-  <script src='bower_components/ractive/ractive.js' type='text/javascript'></script>
-  <script src='bower_components/d3/d3.js'></script>
-  <script src='bower_components/topojson/topojson.js'></script>
+  <script src='node_modules/ractive/ractive.js' type='text/javascript'></script>
+  <script src='node_modules/d3/d3.js'></script>
+  <script src='node_modules/topojson/topojson.js'></script>
 
 </head>
 
@@ -44,6 +44,7 @@
       .rotate([-132.5, 0])
       .scale(1500)
       .parallels([-36, -18]);
+
 
     var path = d3.geo.path()
       .projection(projection);
