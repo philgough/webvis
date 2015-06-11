@@ -1,0 +1,38 @@
+MAPS with D3.js
+arrayjam:
+https://github.com/arrayjam/auspostcodes.git
+Data:
+http://www.abs.gov.au/ausstats/abs@.nsf/mf/1259.0.30.001?OpenDocument
+Geography:
+http://www.abs.gov.au/websitedbs/D3310114.nsf/Home/Geography
+
+Install topjson:
+	# brew install gdal
+	# npm install -g topojson
+
+More info:
+http://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/1259.0.30.001July%202011?OpenDocument
+http://bost.ocks.org/mike/map/
+
+Konwersja:
+	# topojson -q 5e2 --simplify-proportion 0.1 -o mapa2.json STE11aAust.shp australia=STE11aAust.shp
+# topojson -o mapa.json STE11aAust.shp SLA_QLD_06_region.shp australia=STE11aAust.shp sla_queensland=SLA_QLD_06_region.shp
+
+
+To center Australia on the screen:
+      var projection = d3.geo.albers()
+          .translate([width / 2, height / 2])
+          .rotate([-132.5, 0])
+          .center([0, -26.5])
+          .parallels([-36, -18])
+          .scale(900);
+
+Kombinacja map:
+data/combined.topo.json: data/ sources/POA_2011_AUST.shp sources/SSC_2011_AUST.shp sources/STE_2011_AUST.shp
+	topojson -q 5e2 --simplify-proportion 0.1 -p postcode=POA_CODE,suburb=SSC_NAME -o $@ -- \
+		postcodes=sources/POA_2011_AUST.shp \
+		suburbs=sources/SSC_2011_AUST.shp \
+		australia=sources/STE_2011_AUST.shp
+
+Maps available:
+http://betaworks.abs.gov.au/betaworks/betaworks.nsf/dx/asgs-boundaries-online.htm
