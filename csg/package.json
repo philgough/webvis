@@ -1,0 +1,18 @@
+{
+  "name" : "CGS",
+  "version" : "0.0.1",
+  "description": "CGS Field",
+  "author" : "Tomasz Bednarz <tomasz.bednarz@gmail.com>",
+  "contributors" : [],
+  "repository": {
+    "type": "git",
+    "url": "https://tomaszbednarz@bitbucket.org/tomaszbednarz/webvis.git"
+  },
+  "dependencies": {
+    "angular": "~1.4.0",
+    "d3": "~3.5.5",
+    "topojson": "~1.6.16",
+    "ractive": "~0.7.3"
+  },
+  "license": "MIT"
+}
