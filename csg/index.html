@@ -1,12 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang='en-GB'>
 
-<title>CSG Field</title>
+<head>
+  <meta charset='utf-8'>
+  <title>CSG Field</title>
+</head>
 
 <body>
 
-  <div class="container"></div>
+  <h1>CSG Field</h1>
 
+  <div id='container'></div>
+
+  <script id='template' type='text/ractive'>
+    <p>Hello, {{name}}!</p>
+  </script>
+
+  <script src='bower_components/ractive/ractive.js'></script>
+
+  <script>
+    var ractive = new Ractive({
+      el: '#container',
+      template: '#template',
+      data: { name: 'world' }
+    });
+  </script>
 </body>
 
-<script src="bower_components/d3/d3.js"></script>
-<script src="bower_components/angular/angular.js"></script>
+</html>
