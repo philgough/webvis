@@ -39,3 +39,17 @@ topojson:
 	brew install gdal
 	npm install -g topojson
  
+Install Windows 8.1:
+	anaconda 2.2.0+
+http://fwtools.maptools.org/
+
+
+People are saying:
+
+Have you installed MS Visual Studio..?? if not then install it first.. version really doesn't matter.
+Install GDAL
+Install Python (2.7 or later).
+Install FWTools (2.4.7)
+Install node.js
+Then install topojson through npm
+	
