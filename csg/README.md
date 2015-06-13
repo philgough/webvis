@@ -53,3 +53,7 @@ Install FWTools (2.4.7)
 Install node.js
 Then install topojson through npm
 	
+
+https://github.com/mbostock/world-atlas/blob/master/Makefile
+
+OracleVM VirtualBox
