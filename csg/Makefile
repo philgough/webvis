@@ -1,8 +1,21 @@
+PROCESSED_ITEMS_AUSTRALIA = \
+	zip/sla11aaust_shape.zip \
+	zip/ssd11aaust_shape.zip \
+	zip/sd11aaust_shape.zip \
+	zip/ste11aaust_shape.zip \
+	zip/sdist11aaust_shape.zip \
+	zip/lga11aaust_shape.zip \
+	zip/srs11aaust_shape.zip \
+	zip/sr11aaust_shape.zip \
+	zip/msr11aaust_shape.zip	
+
 TOPOJSON = node_modules/.bin/topojson
 TOPOMERGE = node_modules/.bin/topojson-merge
 
 all:
 
+australia: $(PROCESSED_ITEMS_AUSTRALIA) 
+	
 #
 # Statistical Local Areas ASGC Ed 2011 Digital Boundaries in ESRI Shapefile Format
 #
