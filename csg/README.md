@@ -31,6 +31,20 @@ Major Statistical Region ASGC Ed 2011 Digital Boundaries in ESRI Shapefile Forma
 http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1259030001_msr11aaust_shape.zip&1259.0.30.001&Data%20Cubes&F087093CCDF2C68DCA2578CC0012607E&0&July%202011&14.07.2011&Latest
 
 
+
+DATA FROM HERE TOO:
+
+http://www.abs.gov.au/websitedbs/D3310114.nsf/home/Australian+Statistical+Geography+Standard+(ASGS)
+
+
+
+
+
+
+
+http://www.abs.gov.au/websitedbs/D3310114.nsf/home/Australian+Statistical+Geography+Standard+(ASGS)
+
+
 Dane
 http://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/1259.0.30.001July%202011?OpenDocument
 http://bost.ocks.org/mike/map/

@@ -9,13 +9,73 @@ PROCESSED_ITEMS_AUSTRALIA = \
 	zip/sr11aaust_shape.zip \
 	zip/msr11aaust_shape.zip	
 
+PROCESSED_ITEMS_QLD = \
+	zip/mb_2011_qld_shape.zip 
+
+PROCESSED_ITEMS_SA = \
+	zip/sa1_2011_aust_shape.zip \
+	zip/sa2_2011_aust_shape.zip \
+	zip/sa3_2011_aust_shape.zip \
+	zip/sa4_2011_aust_shape.zip
+
 TOPOJSON = node_modules/.bin/topojson
 TOPOMERGE = node_modules/.bin/topojson-merge
 
-all:
+all: $(PROCESSED_ITEMS_AUSTRALIA) $(PROCESSED_ITEMS_QLD) 
 
 australia: $(PROCESSED_ITEMS_AUSTRALIA) 
-	
+qld: $(PROCESSED_ITEMS_QLD) 
+sa: $(PROCESSED_ITEMS_SA)
+
+#########################################################################################
+
+# Data From:
+# http://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/1270.0.55.001July%202011?OpenDocument
+
+#
+# Statistical Area Level 1 (SA1) ASGS Ed 2011 Digital Boundaries in ESRI Shapefile Format 
+#
+zip/sa1_2011_aust_shape.zip:
+	mkdir -p $(dir $@)
+	wget "http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055001_sa1_2011_aust_shape.zip&1270.0.55.001&Data%20Cubes&24A18E7B88E716BDCA257801000D0AF1&0&July%202011&23.12.2010&Latest" -O $@.download
+	mv $@.download $@
+
+#
+# Statistical Area Level 2 (SA2) ASGS Ed 2011 Digital Boundaries in MapInfo Interchange Format 
+#
+zip/sa2_2011_aust_shape.zip:
+	mkdir -p $(dir $@)
+	wget "http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055001_sa2_2011_aust_shape.zip&1270.0.55.001&Data%20Cubes&7130A5514535C5FCCA257801000D3FBD&0&July%202011&23.12.2010&Latest" -O $@.download
+	mv $@.download $@
+
+#
+# Statistical Area Level 3 (SA3) ASGS Ed 2011 Digital Boundaries in MapInfo Interchange Format 
+#
+zip/sa3_2011_aust_shape.zip:
+	mkdir -p $(dir $@)
+	wget "http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055001_sa3_2011_aust_shape.zip&1270.0.55.001&Data%20Cubes&AD2BD90E5DC0F4C7CA257801000D59E3&0&July%202011&23.12.2010&Latest" -O $@.download
+	mv $@.download $@
+
+#
+# Statistical Area Level 4 (SA4) ASGS Ed 2011 Digital Boundaries in MapInfo Interchange Format 
+#
+zip/sa4_2011_aust_shape.zip:
+	mkdir -p $(dir $@)
+	wget "http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055001_sa4_2011_aust_shape.zip&1270.0.55.001&Data%20Cubes&B18D49356F3FDA5FCA257801000D6D2E&0&July%202011&23.12.2010&Latest" -O $@.download
+	mv $@.download $@
+
+#########################################################################################
+
+#
+# Queensland Mesh Blocks ASGS Ed 2011 Digital Boundaries in ESRI Shapefile Format 
+#
+zip/mb_2011_qld_shape.zip:
+	mkdir -p $(dir $@)
+	wget "http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1270055001_mb_2011_qld_shape.zip&1270.0.55.001&Data%20Cubes&28231DC5E634B991CA257801000CC024&0&July%202011&23.12.2010&Latest" -O $@.download
+	mv $@.download $@
+
+#########################################################################################
+
 #
 # Statistical Local Areas ASGC Ed 2011 Digital Boundaries in ESRI Shapefile Format
 #
