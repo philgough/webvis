@@ -108,6 +108,34 @@ zip/ste11aaust_shape.zip:
 	wget "http://www.abs.gov.au/ausstats/subscriber.nsf/log?openagent&1259030001_ste11aaust_shape.zip&1259.0.30.001&Data%20Cubes&D39E28B23F39F498CA2578CC00120E25&0&July%202011&14.07.2011&Latest" -O $@.download
 	mv $@.download $@
 
+shp/ste11aaust_shape.shp: zip/ste11aaust_shape.zip
+	mkdir -p $(dir $@)
+	unzip -d shp $<
+	touch $@
+
+# topojson -q 5e2 --simplify-proportion 0.1 -o mapa2.json STE11aAust.shp australia=STE11aAust.shp
+topo/ste11aaust_shape.json: shp/STE11aAust_shape.shp
+	mkdir -p $(dir $@)
+	mkdir -p data
+	topojson -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
+#	topojson -q 5e2 --simplify-proportion 0.1 -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
+#	$(TOPOJSON) \
+#		-q 5e5 \
+#		--simplify-proportion 0.1 \
+#		-o $@ \
+#		$< \
+#		australia=$<
+
+#	$(TOPOJSON) \
+#		--quantization 1e5 \
+#		--id-property=+iso_n3 \
+#		-- countries=shp/ne_$*_admin_0_countries.shp \
+#		| $(TOPOMERGE) \
+#			-o $@ \
+#			--io=countries \
+#			--oo=land \
+#			--no-key
+
 #
 # Statistical District ASGC Ed 2011 Digital Boundaries in ESRI Shapefile Format 
 #
