@@ -113,12 +113,18 @@ shp/ste11aaust_shape.shp: zip/ste11aaust_shape.zip
 	unzip -d shp $<
 	touch $@
 
+# TODO:
+# use information from .DBF
+#
+#
+
 # topojson -q 5e2 --simplify-proportion 0.1 -o mapa2.json STE11aAust.shp australia=STE11aAust.shp
 topo/ste11aaust_shape.json: shp/STE11aAust_shape.shp
 	mkdir -p $(dir $@)
 	mkdir -p data
-#	topojson -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
-	topojson -q 5e2 --simplify-proportion 0.1 -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
+#	topojson -p true -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
+	topojson -q 5e2 --simplify-proportion 0.1 -p state=STATE_NAME,state_code=STATE_CODE -o data/australia.json australia=shp/STE11aAust.shp 
+#	topojson -q 5e2 --simplify-proportion 0.1 -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
 #	$(TOPOJSON) \
 #		-q 5e5 \
 #		--simplify-proportion 0.1 \

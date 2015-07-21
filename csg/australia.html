@@ -30,6 +30,7 @@
 
   <script id='template' type='text/ractive'>
     <p>Region, {{name}}!</p>
+    <p>Selected state, {{selectedState}}!</p>
   </script>
 
 
@@ -80,10 +81,11 @@
   </script>
 
   <script>
+  
     var ractive = new Ractive({
       el: '#container',
       template: '#template',
-      data: { name: 'Queensland' },
+      data: { name: 'Queensland', selectedState: 'Hello' },
       init: function() {
         console.log('new container initialised');
       }

@@ -1,3 +1,10 @@
+
+
+
+QGIS worked for displaying maps and properties:
+http://www.qgis.org/en/site/forusers/download.html
+
+
 MAPS with D3.js
 arrayjam:
 https://github.com/arrayjam/auspostcodes.git
