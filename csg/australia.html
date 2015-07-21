@@ -70,12 +70,31 @@
 
     var g = svg.append("g");
 
+    /*
     d3.json("data/australia.json", function(error, topology) {
       g.selectAll("path")
         .data(topojson.feature(topology, topology.objects.australia).features)
         .enter().append("path")
         .attr("d", path);
     });
+*/
+
+    d3.json("data/australia.json", function(json) {
+
+
+      /*
+      for (var i = 0; i < json.lenght; i++) {
+       console.log("dkjdejk ");
+      }
+      */
+
+      g.selectAll("path")
+        .data(topojson.feature(json, json.objects.australia).features)
+        .enter()
+        .append("path")
+        .attr("d", path);
+    });
+
 
   </script>
 
