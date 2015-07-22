@@ -98,8 +98,10 @@
         .data(toto) //topojson.feature(json, json.objects.australia).features)
         .enter()
         .append("path")
-        .attr("d", path);
-
+        .attr("d", path)
+        .on("mouseover", function(d) {
+          console.log("mouseover path", d.properties.state);
+        });
 
       d3.csv("data/cities.csv", function(data) {
 
@@ -121,7 +123,11 @@
             return Math.sqrt(parseInt(d.population)*0.00003);
           })
           .style("fill", "yellow")
-          .style("opacity", 0.85);
+          .style("opacity", 0.85)
+          .on("mouseover", function(d) {
+            console.log("mouseover city", d.place);
+            ractive.set("selectedState", d.place);
+          });
 
       });
 
@@ -132,7 +138,7 @@
 
   <script>
 
-    var ractive = new Ractive({
+    var ractive = new Ractive( {
       el: '#container',
       template: '#template',
       data: { name: 'Queensland', selectedState: 'Hello' },
