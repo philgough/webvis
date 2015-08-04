@@ -44,11 +44,10 @@
     //
     var projection = d3.geo.albers()
       .translate([width/2, height/2])
-      .center([0, -25])
-      .rotate([-132.5, 0])
-      .scale(850)
+      .center([18.5, -27.1]) // australia = [0, -25]
+      .rotate([-132.5, 0]) // australia [-132.5, 0]
+      .scale(200000) // australia = 850
       .parallels([-36, -18]);
-
 
     var path = d3.geo.path()
       .projection(projection);
@@ -103,7 +102,7 @@
           console.log("mouseover path", d.properties.state);
         });
 
-      d3.csv("data/cities.csv", function(data) {
+      d3.csv("data/cities2.csv", function(data) {
 
         for (var j = 0; j < data.length; j++)
         {
@@ -120,7 +119,7 @@
             return projection([d.lon, d.lat])[1];
           })
           .attr("r", function(d) {
-            return Math.sqrt(parseInt(d.population)*0.00003);
+            return Math.sqrt(20); //parseInt(d.population)*0.00003);
           })
           .style("fill", "yellow")
           .style("opacity", 0.85)
