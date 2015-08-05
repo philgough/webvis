@@ -44,9 +44,9 @@
     //
     var projection = d3.geo.albers()
       .translate([width/2, height/2])
-      .center([18.5, -27.1]) // australia = [0, -25]
+      .center([0, -25]) // australia = [0, -25] steve = [18.5, -27.1]
       .rotate([-132.5, 0]) // australia [-132.5, 0]
-      .scale(200000) // australia = 850
+      .scale(850) // australia = 850 steve = 200000
       .parallels([-36, -18]);
 
     var path = d3.geo.path()
@@ -119,7 +119,7 @@
             return projection([d.lon, d.lat])[1];
           })
           .attr("r", function(d) {
-            return Math.sqrt(20); //parseInt(d.population)*0.00003);
+            return Math.sqrt(parseInt(d.population)*0.00003);
           })
           .style("fill", "yellow")
           .style("opacity", 0.85)
