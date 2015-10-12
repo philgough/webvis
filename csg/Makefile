@@ -123,7 +123,8 @@ topo/ste11aaust_shape.json: shp/STE11aAust_shape.shp
 	mkdir -p $(dir $@)
 	mkdir -p data
 #	topojson -p true -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
-	topojson -q 5e2 --simplify-proportion 0.1 -p state=STATE_NAME,state_code=STATE_CODE -o data/australia.json australia=shp/STE11aAust.shp 
+#	topojson -q 5e2 --simplify-proportion 0.1 -p state=STATE_NAME,state_code=STATE_CODE -o data/australia.json australia=shp/STE11aAust.shp 
+	topojson -p state=STATE_NAME,state_code=STATE_CODE -o data/australia.json australia=shp/STE11aAust.shp 
 #	topojson -q 5e2 --simplify-proportion 0.1 -o data/australia.json shp/STE11aAust.shp australia=shp/STE11aAust.shp
 #	$(TOPOJSON) \
 #		-q 5e5 \
