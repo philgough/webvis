@@ -78,59 +78,68 @@
     });
 */
 
-    d3.json("data/australia.json", function(json) {
+    // d3.json("data/australia.json", function(json) {
 
+aus = {};
+d3.json("data/australia.json", function(error, au) {
+  if (error) return console.log(error);
+  aus = au;
+//  console.log(au.arcs)
+  g.append("path")
+    .datum(topojson.feature(au, au.objects))
+    .attr("d", d3.geo.path().projection(d3.geo.mercator()));
+});
 
-      /*
-      for (var i = 0; i < json.lenght; i++) {
-       console.log("dkjdejk ");
-      }
-      */
-      var toto = topojson.feature(json, json.objects.australia).features;
+      
+      // for (var i = 0; i < json.lenght; i++) {
+      //  console.log("dkjdejk ");
+      // }
+      
+      // var toto = topojson.feature(json, json.objects.australia).features;
         
-      for (var i = 0; i < toto.length; i++)
-      {
-        console.log(toto[i].properties.state, toto[i].properties.state_code);
-      }
+      // for (var i = 0; i < toto.length; i++)
+      // {
+      //   console.log(toto[i].properties.state, toto[i].properties.state_code);
+      // }
 
-      g.selectAll("path")
-        .data(toto) //topojson.feature(json, json.objects.australia).features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        .on("mouseover", function(d) {
-          console.log("mouseover path", d.properties.state);
-        });
+    //   g.selectAll("path")
+    //     .data(toto) //topojson.feature(json, json.objects.australia).features)
+    //     .enter()
+    //     .append("path")
+    //     .attr("d", path)
+    //     .on("mouseover", function(d) {
+    //       console.log("mouseover path", d.properties.state);
+    //     });
 
-      d3.csv("data/cities2.csv", function(data) {
+    //   d3.csv("data/cities2.csv", function(data) {
 
-        for (var j = 0; j < data.length; j++)
-        {
-          console.log(j);
-        }
-        svg.selectAll("circle")
-          .data(data)
-          .enter()
-          .append("circle")
-          .attr("cx", function(d) {
-            return projection([d.lon, d.lat])[0];
-          })
-          .attr("cy", function(d) {
-            return projection([d.lon, d.lat])[1];
-          })
-          .attr("r", function(d) {
-            return Math.sqrt(parseInt(d.population)*0.00003);
-          })
-          .style("fill", "yellow")
-          .style("opacity", 0.85)
-          .on("mouseover", function(d) {
-            console.log("mouseover city", d.place);
-            ractive.set("selectedState", d.place);
-          });
+    //     for (var j = 0; j < data.length; j++)
+    //     {
+    //       console.log(j);
+    //     }
+    //     svg.selectAll("circle")
+    //       .data(data)
+    //       .enter()
+    //       .append("circle")
+    //       .attr("cx", function(d) {
+    //         return projection([d.lon, d.lat])[0];
+    //       })
+    //       .attr("cy", function(d) {
+    //         return projection([d.lon, d.lat])[1];
+    //       })
+    //       .attr("r", function(d) {
+    //         return Math.sqrt(parseInt(d.population)*0.00003);
+    //       })
+    //       .style("fill", "yellow")
+    //       .style("opacity", 0.85)
+    //       .on("mouseover", function(d) {
+    //         console.log("mouseover city", d.place);
+    //         ractive.set("selectedState", d.place);
+    //       });
 
-      });
+      // });
 
-    });
+    // });
 
 
   </script>
