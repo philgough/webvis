@@ -18,7 +18,7 @@
 
   <script src='node_modules/ractive/ractive.js' type='text/javascript'></script>
   <script src='node_modules/d3/d3.js'></script>
-  <script src='node_modules/topojson/topojson.js'></script>
+  <script src='node_modules/topojson/build/topojson.js'></script>
 
 </head>
 
@@ -30,28 +30,31 @@
 
   <script id='template' type='text/ractive'>
     <p>Region, {{name}}!</p>
+    <p>Selected state, {{selectedState}}!</p>
   </script>
 
 
   <script type='text/javascript'>
 
-    var width = 800;
-    var height = 600;
+    var width = 650;
+    var height = 800;
 
-    var projection = d3.geo.albers()
-      .translate([width/2, height/2])
-      .center([+20, -20])
-      .rotate([-132.5, 0])
-      .scale(1500)
-      .parallels([-36, -18]);
+    // bounding box:
+    // [96.816941408,-43.740509603,159.109219008,-9.142175977]
+    // //
+    // var projection = d3.geo.albers()
+    //   .translate([width/2, height/2])
+    //   .center([0, -25]) // australia = [0, -25] steve = [18.5, -27.1]
+    //   .rotate([-132.5, 0]) // australia [-132.5, 0]
+    //   .scale(850) // australia = 850 steve = 200000
+    //   .parallels([-36, -18]);
 
-
-    var path = d3.geo.path()
-      .projection(projection);
+    // var path = d3.geo.path()
+    //   .projection(projection);
 
     var svg = d3.select("body").append("svg")
-      .attr("width", width)
-      .attr("height", height);
+    .attr("width", width*2)
+    .attr("height", height);
 
     /*
     // working USA map
@@ -64,22 +67,113 @@
     });
     */
 
-    var g = svg.append("g");
+    var contextView = svg.append("g").attr("transform", "translate("+width+",0)");
+    var zoomedView = svg.append("g");
 
-    d3.json("mapa.json", function(error, topology) {
-      g.selectAll("path")
-        .data(topojson.feature(topology, topology.objects.sla_queensland).features)
-        .enter().append("path")
-        .attr("d", path);
+
+    qld = {};
+    d3.json("data/output_json_1.json", function(error, au) {
+      if (error) return console.log(error);
+      qld = au;
+
+      // g.append("path")
+      // .datum(topojson.feature(qld, qld.objects.qld_slas))
+      // .attr("d", d3.geo.path()
+      //   .projection(d3.geo.equirectangular()
+      //     .scale(1700)
+      //     .translate([-width*6.1, -height/4])
+      //     ));
+
+      tf = topojson.feature(qld, qld.objects.qld_slas)
+      // for some reason wambo is filling the screen?
+      for (var j = 0 ; j < tf.features.length; j++) {
+        // don't include wambo for now...
+        if(j != 462) {
+          contextView.append("path")
+            .datum(tf.features[j]).attr("id", function(d) {
+              return d.properties.name
+            })
+            .attr("class", "context")
+            .attr("d", d3.geo.path()
+           .projection(d3.geo.mercator()
+             .scale(1700)
+             .translate([-width*6.1, -height/4])
+             ));
+        
+        zoomedView.append("path")
+            .datum(tf.features[j]).attr("id", function(d) {
+              return d.properties.name
+            })
+            .attr("class", "zoom")
+            .attr("d", d3.geo.path()
+           .projection(d3.geo.mercator()
+             .scale(18500)
+             .translate([-width*75.5, -height*11])
+             ));
+        }
+      }
     });
+
+
+      // for (var i = 0; i < json.lenght; i++) {
+      //  console.log("dkjdejk ");
+      // }
+      
+      // var toto = topojson.feature(json, json.objects.australia).features;
+
+      // for (var i = 0; i < toto.length; i++)
+      // {
+      //   console.log(toto[i].properties.state, toto[i].properties.state_code);
+      // }
+
+    //   g.selectAll("path")
+    //     .data(toto) //topojson.feature(json, json.objects.australia).features)
+    //     .enter()
+    //     .append("path")
+    //     .attr("d", path)
+    //     .on("mouseover", function(d) {
+    //       console.log("mouseover path", d.properties.state);
+    //     });
+
+    //   d3.csv("data/cities2.csv", function(data) {
+
+    //     for (var j = 0; j < data.length; j++)
+    //     {
+    //       console.log(j);
+    //     }
+    //     svg.selectAll("circle")
+    //       .data(data)
+    //       .enter()
+    //       .append("circle")
+    //       .attr("cx", function(d) {
+    //         return projection([d.lon, d.lat])[0];
+    //       })
+    //       .attr("cy", function(d) {
+    //         return projection([d.lon, d.lat])[1];
+    //       })
+    //       .attr("r", function(d) {
+    //         return Math.sqrt(parseInt(d.population)*0.00003);
+    //       })
+    //       .style("fill", "yellow")
+    //       .style("opacity", 0.85)
+    //       .on("mouseover", function(d) {
+    //         console.log("mouseover city", d.place);
+    //         ractive.set("selectedState", d.place);
+    //       });
+
+      // });
+
+    // });
+
 
   </script>
 
   <script>
-    var ractive = new Ractive({
+
+    var ractive = new Ractive( {
       el: '#container',
       template: '#template',
-      data: { name: 'Queensland' },
+      data: { name: 'Queensland', selectedState: 'Hello' },
       init: function() {
         console.log('new container initialised');
       }
