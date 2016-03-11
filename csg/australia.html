@@ -41,16 +41,16 @@
 
     // bounding box:
     // [96.816941408,-43.740509603,159.109219008,-9.142175977]
-    //
-    var projection = d3.geo.albers()
-      .translate([width/2, height/2])
-      .center([0, -25]) // australia = [0, -25] steve = [18.5, -27.1]
-      .rotate([-132.5, 0]) // australia [-132.5, 0]
-      .scale(850) // australia = 850 steve = 200000
-      .parallels([-36, -18]);
+    // //
+    // var projection = d3.geo.albers()
+    //   .translate([width/2, height/2])
+    //   .center([0, -25]) // australia = [0, -25] steve = [18.5, -27.1]
+    //   .rotate([-132.5, 0]) // australia [-132.5, 0]
+    //   .scale(850) // australia = 850 steve = 200000
+    //   .parallels([-36, -18]);
 
-    var path = d3.geo.path()
-      .projection(projection);
+    // var path = d3.geo.path()
+    //   .projection(projection);
 
     var svg = d3.select("body").append("svg")
       .attr("width", width)
@@ -80,17 +80,18 @@
 
     // d3.json("data/australia.json", function(json) {
 
-aus = {};
-d3.json("data/australia.json", function(error, au) {
+qld = {};
+d3.json("data/qld.json", function(error, au) {
   if (error) return console.log(error);
-  aus = au;
+  qld = au;
 //  console.log(au.arcs)
-  g.append("path")
-    .datum(topojson.feature(au, au.objects))
-    .attr("d", d3.geo.path().projection(d3.geo.mercator()));
-});
+  // g.append("path")
+  //   .datum(topojson.feature(au, au.objects))
+  //   .attr("d", d3.geo.path().projection(d3.geo.mercator()));
 
+g.append("path").datum(topojson.feature(qld, qld.objects.qld_slas)).attr("d", d3.geo.path().projection(d3.geo.equirectangular().scale(400).translate([-width/2, height/4])))
       
+});
       // for (var i = 0; i < json.lenght; i++) {
       //  console.log("dkjdejk ");
       // }
